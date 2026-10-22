@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>André Luís | 22 de outubro de 2026</title>
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta name="description" content="Um registro de gratidão. 22 de outubro de 2026." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,400&display=swap" />
+  <style>
+    :root {
+      --radius: 1.5rem;
+      --green: #abe054;
+      --orange: #fa553c;
+      --blue: #0a84ff;
+      --black: #050506;
+      --offwhite: #f5f2ea;
+      --text-dim: #f5f2ea9e;
+      --text-faint: #f5f2ea6b;
+      --spring: cubic-bezier(.34, 1.56, .64, 1);
+      --spring-soft: cubic-bezier(.2, .8, .2, 1);
+      --apple: cubic-bezier(.32, .72, 0, 1);
+      --ease-glass: var(--apple);
+      --glass-bg: linear-gradient(135deg, #ffffff24, #ffffff0b);
+      --glass-border: #ffffff29;
+      --glass-blur: blur(22px) saturate(185%);
+      --shadow: #00000073;
+      --background: var(--black);
+      --foreground: var(--offwhite);
+      --primary: var(--green);
+      --accent: var(--orange);
+      --muted-foreground: var(--text-dim);
+      --border: #ffffff1a;
+      --glass-edge: var(--glass-border);
+      --shadow-float: 0 20px 60px -30px var(--shadow);
+      --gradient-aurora:
+        radial-gradient(60% 45% at 12% 8%, #abe0542e 0%, transparent 68%),
+        radial-gradient(38% 32% at 88% 20%, #fa553c26 0%, transparent 70%),
+        radial-gradient(55% 40% at 50% 100%, #0a84ff1a 0%, transparent 72%);
+      --gradient-title: linear-gradient(118deg, #f5f2ea 8%, #abe054 46%, #fa553c 78%, #f5f2ea 100%);
+      --font-sans: "Inter", "SF Pro Text", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-editorial: "Newsreader", "Apple Garamond", "Iowan Old Style", Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    ::selection { background: transparent; }
+    * {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .ambient {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-light { position: absolute; inset: 0; background-image: var(--gradient-aurora); }
+    .grain::after {
+      content: "";
+      pointer-events: none;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+      position: absolute;
+      inset: 0;
+    }
+    .halo {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      height: 42rem;
+      width: 42rem;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgb(171 224 84 / 10%) 0%, rgb(250 85 60 / 6%) 36%, transparent 70%);
+      filter: blur(40px);
+    }
+    .float-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      animation: float-orb 14s var(--ease-glass) infinite;
+    }
+    .orb-a { left: -8%; top: 8%; height: 18rem; width: 18rem; background: rgb(171 224 84 / 10%); }
+    .orb-b { right: -10%; top: 28%; height: 20rem; width: 20rem; background: rgb(250 85 60 / 8%); animation-delay: 1.6s; }
+    .orb-c { bottom: -8%; left: 22%; height: 18rem; width: 18rem; background: rgb(171 224 84 / 8%); animation-delay: 3.2s; }
+    .orb-d { bottom: 18%; right: 18%; height: 14rem; width: 14rem; background: rgb(10 132 255 / 8%); animation-delay: 2.1s; }
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      background: var(--background);
+      transition: opacity .9s var(--apple), visibility .9s var(--apple);
+    }
+    .loader.is-gone { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-orbit {
+      border: 1px solid #abe0542e;
+      border-radius: 50%;
+      width: min(18rem, 70vw);
+      height: min(18rem, 70vw);
+      animation: 8s linear infinite loader-spin;
+      position: absolute;
+      box-shadow: 0 0 40px #abe0541a, inset 0 0 30px #fa553c14;
+    }
+    .loader-orbit::before {
+      content: "";
+      background: var(--green);
+      width: 8px;
+      height: 8px;
+      box-shadow: 0 0 16px var(--green);
+      border-radius: 50%;
+      position: absolute;
+      top: -4px;
+      left: 50%;
+    }
+    .loader-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .loader-kicker {
+      font-size: .62rem;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      letter-spacing: .7em;
+      animation: rise 1.1s var(--apple) .2s both;
+    }
+    .loader-title {
+      font-family: var(--font-editorial);
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 500;
+      animation: blur-in 1.2s var(--apple) .35s both;
+    }
+    .loader-bar {
+      height: 3px;
+      width: 10rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #ffffff14;
+      border: 1px solid var(--glass-border);
+    }
+    .loader-bar > span {
+      display: block;
+      height: 100%;
+      width: 100%;
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      animation: load-bar 1.6s var(--apple) .2s both;
+    }
+
+    .phone-bar {
+      position: fixed;
+      top: 0;
+      inset-inline: 0;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: .55rem 1.15rem .45rem;
+      pointer-events: none;
+      animation: rise 1s var(--apple) 1.85s both;
+    }
+    .phone-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4.2rem;
+      background: linear-gradient(180deg, #1a120ccc 0%, #0c090600 100%);
+      pointer-events: none;
+    }
+    .bar-time {
+      position: relative;
+      z-index: 1;
+      font-size: .92rem;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: var(--offwhite);
+      font-variant-numeric: tabular-nums;
+    }
+    .island {
+      position: relative;
+      z-index: 1;
+      width: 7.4rem;
+      height: 2.05rem;
+      border-radius: 999px;
+      background: #050506;
+      box-shadow: 0 8px 24px #00000073, inset 0 1px #ffffff14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+    }
+    .island-cam {
+      width: .52rem;
+      height: .52rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #3a4450, #111318 62%);
+      box-shadow: 0 0 0 1px #ffffff10, inset 0 0 4px #0a84ff33;
+    }
+    .island-dot {
+      width: .38rem;
+      height: .38rem;
+      border-radius: 50%;
+      background: #2a1a16;
+      box-shadow: 0 0 6px #fa553c66, inset 0 0 4px #fa553c88;
+    }
+    .bar-status {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: .45rem;
+      color: var(--offwhite);
+    }
+    .bar-status svg { display: block; }
+
+    main {
+      position: relative;
+      z-index: 1;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 6.5rem 1rem 5rem;
+      animation: page-in 1.2s var(--apple) 1.7s both;
+    }
+
+    .stage {
+      width: min(44rem, 100%);
+      margin: 0 auto;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+      animation: rise 1s var(--apple) 2s both;
+    }
+    .status-pill {
+      backdrop-filter: blur(18px);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: oklch(100% 0 0 / .02);
+      border: 1px solid oklch(100% 0 0 / .07);
+      border-radius: 999px;
+      align-items: center;
+      padding: .52rem .8rem;
+      font-size: .66rem;
+      display: inline-flex;
+    }
+    .status-pill.is-live { color: var(--primary); }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: var(--green);
+      align-items: center;
+      gap: .6rem;
+      font-size: .68rem;
+      display: inline-flex;
+      animation: rise 1s var(--apple) 2.1s both;
+    }
+    .eyebrow::before {
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--green));
+      width: 1.2rem;
+      height: 1px;
+    }
+
+    h1 {
+      margin-top: 1.25rem;
+      font-family: var(--font-editorial);
+      font-size: clamp(2.4rem, 8vw, 5.2rem);
+      font-weight: 500;
+      letter-spacing: -.04em;
+      line-height: .92;
+    }
+    .title-gradient {
+      background-image: var(--gradient-title);
+      background-size: 180% 100%;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: rise 1.1s var(--apple) 2.2s both, title-shift 10s ease-in-out 2.8s infinite;
+    }
+    .subtitle {
+      margin-top: .85rem;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.12rem, 3vw, 1.7rem);
+      font-weight: 500;
+      letter-spacing: -.06em;
+      color: rgb(245 242 234 / 72%);
+      animation: rise 1.1s var(--apple) 2.35s both;
+    }
+
+    .lead {
+      margin-top: 1.6rem;
+      max-width: 38rem;
+      font-size: clamp(.96rem, 2vw, 1.15rem);
+      line-height: 1.75;
+      color: var(--muted-foreground);
+      animation: rise 1.1s var(--apple) 2.5s both;
+    }
+    .lead em { font-family: var(--font-editorial); font-style: italic; color: var(--foreground); }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      animation: rise 1.1s var(--apple) 2.65s both;
+    }
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid #ffffff1a;
+      padding: .7rem 1.4rem;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .5s var(--apple);
+      backdrop-filter: blur(22px);
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -50%;
+      width: 33%;
+      background: #ffffff59;
+      filter: blur(12px);
+      transform: skewX(-12deg);
+      opacity: 0;
+      transition: all .7s var(--apple);
+    }
+    .btn:hover::after { left: 130%; opacity: 1; }
+    .btn-gold {
+      background: linear-gradient(135deg, rgba(255,196,126,.98), rgba(255,162,78,.94), rgba(255,214,161,.92));
+      color: #1a1209;
+      box-shadow: 0 18px 42px rgba(255,169,92,.38);
+    }
+    .btn-gold:hover { filter: brightness(1.05); }
+    .btn-glass {
+      background: var(--glass-bg);
+      color: var(--foreground);
+    }
+    .btn-glass:hover { border-color: #abe05466; background: #ffffff14; }
+
+    .glass-panel {
+      margin-top: 2.4rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--glass-edge);
+      border-radius: calc(var(--radius) + 12px);
+      box-shadow: var(--shadow-float), inset 0 1px 0 0 oklch(100% 0 0 / .14);
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.4rem, 4vw, 2.4rem);
+      animation: blur-up 1.15s var(--apple) 2.8s both;
+    }
+    .glass-panel::after {
+      content: "";
+      pointer-events: none;
+      opacity: .7;
+      background: linear-gradient(140deg, oklch(100% 0 0 / .12) 0%, transparent 32% 68%, oklch(100% 0 0 / .06) 100%);
+      position: absolute;
+      inset: 0;
+    }
+    .reading {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.08rem, 2.1vw, 1.26rem);
+      font-weight: 400;
+      line-height: 1.85;
+      color: rgb(245 242 234 / 88%);
+    }
+    .reading p + p { margin-top: 1.35rem; }
+    .reading em { font-style: italic; color: var(--foreground); }
+    .reading .sign {
+      margin-top: 1.6rem;
+      font-family: var(--font-sans);
+      font-size: .62rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+
+    .kinetic-band {
+      background: #ffffff05;
+      border-top: 1px solid #ffffff17;
+      border-bottom: 1px solid #ffffff17;
+      width: 100vw;
+      margin: 3.5rem 0 0 calc(50% - 50vw);
+      padding: 1.5rem 0 1.7rem;
+      overflow: hidden;
+      transform: rotate(-1.3deg) scale(1.02);
+    }
+    .kinetic-track {
+      width: max-content;
+      color: var(--offwhite);
+      font-family: var(--font-editorial);
+      letter-spacing: -.045em;
+      white-space: nowrap;
+      align-items: center;
+      gap: 2.2rem;
+      font-size: clamp(2rem, 5vw, 5rem);
+      line-height: .82;
+      animation: 32s linear infinite kinetic-drift;
+      display: flex;
+    }
+    .kinetic-mark {
+      color: var(--green);
+      font-family: var(--font-sans);
+      font-size: .5em;
+    }
+
+    .footer-note {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .8rem;
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      animation: rise 1s var(--apple) 3s both;
+    }
+
+    .assinatura {
+      margin-top: 2.6rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      animation: rise 1s var(--apple) 3.1s both;
+    }
+    .assinatura img {
+      width: min(100%, 42rem);
+      height: auto;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0) scale(1); }
+      40% { transform: translate(18px, -22px) scale(1.08); }
+      70% { transform: translate(-14px, 12px) scale(.96); }
+    }
+    @keyframes loader-spin { to { transform: rotate(360deg); } }
+    @keyframes load-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes blur-in {
+      from { opacity: 0; filter: blur(12px); transform: translateY(16px); }
+      to { opacity: 1; filter: none; transform: none; }
+    }
+    @keyframes blur-up {
+      from { opacity: 0; filter: blur(12px); transform: translateY(28px) scale(.978); }
+      to { opacity: 1; filter: none; transform: none; }
+    }
+    @keyframes page-in {
+      from { opacity: 0; filter: blur(8px); transform: translateY(18px) scale(.992); }
+      to { opacity: 1; filter: none; transform: none; }
+    }
+    @keyframes kinetic-drift {
+      from { transform: translate(-12%); }
+      to { transform: translate(-58%); }
+    }
+    @keyframes title-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-light"></div>
+    <div class="grain"></div>
+    <div class="halo"></div>
+    <div class="float-orb orb-a"></div>
+    <div class="float-orb orb-b"></div>
+    <div class="float-orb orb-c"></div>
+    <div class="float-orb orb-d"></div>
+  </div>
+
+  <header class="phone-bar" aria-label="Barra de status">
+    <time class="bar-time" id="live-clock">00:00</time>
+    <div class="island" aria-hidden="true">
+      <span class="island-cam"></span>
+      <span class="island-dot"></span>
+    </div>
+    <div class="bar-status" aria-hidden="true">
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor">
+        <path d="M8.5 2.4c2.2 0 4.2.8 5.8 2.2l1.1-1.2A10.3 10.3 0 0 0 8.5.2 10.3 10.3 0 0 0 .6 3.4L1.7 4.6A8.3 8.3 0 0 1 8.5 2.4Z" opacity=".95"/>
+        <path d="M8.5 5.5c1.4 0 2.6.5 3.6 1.4l1.1-1.2A7.1 7.1 0 0 0 8.5 3.8 7.1 7.1 0 0 0 3.8 5.7L4.9 6.9A5.4 5.4 0 0 1 8.5 5.5Z" opacity=".95"/>
+        <path d="M8.5 8.6c.7 0 1.3.3 1.8.7L8.5 11.4 6.7 9.3c.5-.4 1.1-.7 1.8-.7Z"/>
+      </svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+        <rect x=".6" y=".6" width="21" height="10.8" rx="2.4" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+        <rect x="2.2" y="2.2" width="16.4" height="7.6" rx="1.2" fill="currentColor"/>
+        <path d="M23.2 4.1v3.8c.7-.4.9-1 .9-1.9s-.2-1.5-.9-1.9Z" fill="currentColor" opacity=".7"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="loader" id="loader">
+    <div class="ambient-light" style="opacity:.7"></div>
+    <div class="loader-orbit"></div>
+    <div class="loader-copy">
+      <span class="loader-kicker">22 de outubro</span>
+      <h2 class="loader-title title-gradient">Obrigado</h2>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="stage">
+      <div class="pills">
+        <span class="status-pill is-live">22.10.2026</span>
+        <span class="status-pill">André Luís</span>
+      </div>
+
+      <p class="eyebrow">Um registro de gratidão</p>
+      <h1><span class="title-gradient">Obrigado</span></h1>
+
+      <div class="actions">
+        <a class="btn btn-gold" href="#mensagem">Ler o texto</a>
+        <a class="btn btn-glass" href="#fim">Até o fim</a>
+      </div>
+
+      <article class="glass-panel" id="mensagem">
+        <div class="reading">
+          <p>Acho q venci na vida, não pelo q tenho, mas por tudo aquilo q venho conquistando de poquin em poquin, a cada dia nas coisas simples, ouvindo uma boa melodia, rezando por mim, pela minha caminhada, pelos meus amigos e familiares, fazendo a minha parte e colocando em prática aquilo q aprendi, pq pra mim, aprendizado não é algo q deve ficar só com a gente, mas algo q podemos compartilhar com as pessoas à nossa volta. Aprender tbm é ter vontade de melhorar, reconhecer os próprios erros e entender q sempre existe algo novo pra descobrir.</p>
+          <p>Neste ano, aprendi q até os dias ruins podem trazer coisas boas, não pq seja fácil passar por eles, mas pq, muitas vezes, é errando q a gente percebe o q precisa mudar aos poucos, vamos amadurecendo, enxergando as situações de outra forma e entendendo q nem tudo acontece do jeito q planejamos.</p>
+          <p>Minha rotina não é das mais tranquilas. Entre o trabalho como designer, os estudos e minha rotina militar, os dias passam rápido e, às vezes, parece q faltam horas pra conseguir fazer tudo, tem o cansaço, as responsabilidades e aqueles momentos em q preciso parar um pouco e organizar a cabeça, mas essa é a fase q estou vivendo, e tenho aprendido muito com ela. Gosto de comunicação, de escrever e de colocar em palavras algumas coisas q penso, até pq, pela minha própria experiência, sei q sem comunicação a gente não vai muito longe.</p>
+          <p>Esse texto é mais uma dessas reflexões, parte de um projeto q comecei, mas q, no momento, tá parado... talvez eu ainda não tenha conseguido dar continuidade como gostaria, mas hoje senti vontade de escrever e deixar registrado um pouco do q venho vivendo, quem sabe, daqui a alguns anos, eu volte aqui e veja o quanto mudei desde esse dia.</p>
+          <p>Diante de tudo, existe alguém q procuro colocar à frente: Jesus. É a Ele q recorro quando preciso tomar decisões, quando as coisas dão errado e até quando não sei muito bem o q dizer. Durante uma oração, peço pra q nada do q eu viva seja em vão, q tudo possa me ensinar alguma coisa e q eu tenha sabedoria pra levar esse aprendizado adiante, não só pra mim, mas tbm pra quem estiver à minha volta.</p>
+          <p>Lembro de uma frase atribuída a Santa Teresa d'Ávila: <em>“Se necessário, conte tijolos”</em>... pode parecer uma frase simples, mas gosto de pensar no q ela representa. Às vezes, a gente quer construir tudo de uma vez, chegar logo onde deseja e ver os resultados acontecendo, mas esquece q as coisas levam tempo. De poquin em poquin, vamos construindo nossos caminhos, aprendendo com cada etapa e fazendo o q está ao nosso alcance. Tbm me lembro daquela ideia de Isaac Newton de q toda ação tem uma reação. Nossas escolhas e atitudes têm consequências, mesmo quando não percebemos na hora, e acho q isso vale pra muita coisa na vida, inclusive pras relações q construímos e pra forma como tratamos as pessoas.</p>
+          <p>2026 foi um ano de muitas variações, quase um El Niño na minha vida kkkkk.</p>
+          <p>Aconteceram coisas q eu esperava e outras q nem imaginava... conheci pessoas, fortaleci amizades e vivi momentos q quero levar comigo por muito tempo. E, se vc está lendo isso agora, talvez faça parte de alguma dessas lembranças, ou talvez a gente tenha conversado bastante, compartilhado momentos ou simplesmente cruzado o caminho um do outro de uma forma q acabou fazendo diferença. Nem sempre a gente percebe o quanto certas pessoas passam a fazer parte da nossa vida... às vezes, uma conversa simples, uma brincadeira ou um conselho acaba ficando guardado na memória e talvez a outra pessoa nem imagine, mas aquilo teve importância pra gente.</p>
+          <p>Escrevo isso hoje, 22 de outubro de 2026, e sei q algumas coisas vão mudar daqui pra frente. Talvez algumas partes da minha rotina deixem de existir da forma como são hoje, outras responsabilidades apareçam e eu precise me adaptar novamente. Afinal, tudo é uma fase, e acho q crescer tbm é entender quando chega a hora de mudar.</p>
+          <p>Tenho pensado bastante nas minhas amizades e na forma como me relaciono com as pessoas. Não quero mais estar em determinados lugares só por estar, continuar conversas apenas por costume ou responder por afeto quando, na verdade, já não existe a mesma vontade. Quero aprender a respeitar mais o q sinto e tbm respeitar o espaço e as escolhas de cada pessoa.</p>
+          <p>Isso não significa q deixei de me importar, mas q estou aprendendo q uma relação precisa ter liberdade...</p>
+          <p>Não quero amizades baseadas em cobranças, manipulação ou na necessidade de provar o tempo todo q me importo. Quero poder conversar, discordar, ouvir e aprender, sem q tudo precise virar um problema. E uma “coisa” q considero importante é ter pessoas q consigam me corrigir quando estou errado.</p>
+          <p>Ñ sou perfeito e nem quero agir como se soubesse de tudo. Tenho muito a melhorar, e sei q, em alguns momentos, vou precisar ouvir coisas q talvez não sejam tão fáceis de aceitar, mas prefiro isso a estar cercado de pessoas q percebem meus erros e se calam. Claro q cada um tem seu jeito de demonstrar preocupação, mas acredito q a sinceridade, quando vem acompanhada de respeito, tbm é uma forma de cuidado.</p>
+          <p>Sou grato por todos q me ajudaram até aqui, por quem esteve presente nos dias bons e por quem me ajudou a enxergar as coisas de outra forma. Não vou citar nomes, pq não quero deixar ninguém de fora e nem transformar isso numa lista de agradecimentos. Se vc fez parte da minha caminhada, talvez saiba disso sem precisar encontrar seu nome escrito aqui (...)</p>
+          <p>Não sei como será o próximo ano, quais pessoas continuarão por perto ou quais mudanças ainda vou precisar enfrentar. Espero continuar aprendendo, amadurecendo e encontrando formas melhores de lidar com as situações. Quero seguir com meus projetos, crescer profissionalmente, cuidar da minha caminhada e não deixar q a correria me faça esquecer das coisas q realmente têm valor pra mim.</p>
+          <p>E espero q, quando chegar o fim deste ano, eu possa olhar pra trás e reconhecer q fiz a minha parte, q não deixei de tentar e q aprendi alguma coisa com aquilo q vivi. Não espero q tudo seja perfeito, pq sei q não vai ser, mas quero ter a consciência de q procurei fazer o melhor q pude com aquilo q tinha em cada momento. No fim, acho q vencer na vida tem muito mais a ver com isso do q com aquilo q a gente possui: é olhar pra própria história e perceber q ainda existe vontade de aprender, melhorar e seguir em frente.</p>
+          <p>Obrigado por tudo e por todos q fizeram parte dessa caminhada até aqui. Talvez eu não tenha demonstrado minha gratidão da melhor forma em alguns momentos, mas levo comigo o q aprendi e as lembranças q construí com cada pessoa. Não escrevo isso como uma despedida, mas como um registro de uma fase q estou vivendo e de algumas coisas q já não quero levar da mesma maneira pra próxima etapa. Quero continuar sendo eu, mas entendendo q posso mudar, rever minhas escolhas e aprender com aquilo q a vida me apresenta.</p>
+          <p>Espero q o próximo ano traga novos aprendizados, boas oportunidades e momentos q façam valer a pena toda essa caminhada, e q eu nunca me esqueça de agradecer, mesmo quando as coisas não saírem como planejei. Por enquanto, sigo fazendo a minha parte, com Jesus à frente, aprendendo de poquin em poquin e contando os tijolos, pq ainda tem muita coisa pra construir.</p>
+          <p id="fim">E se um dia vc lembrar de mim, espero q seja com um sorriso no rosto e a certeza de q, em algum momento da vida, nossos caminhos se cruzaram por um motivo… e isso, pra mim, já valeu muito :D</p>
+          <p class="sign">22 de outubro de 2026 · André Luís</p>
+        </div>
+      </article>
+
+      <div class="kinetic-band" aria-hidden="true">
+        <div class="kinetic-track">
+          <span>OBRIGADO</span><span class="kinetic-mark">✦</span>
+          <span>ANDRÉ LUÍS</span><span class="kinetic-mark">✦</span>
+          <span>CONTE TIJOLOS</span><span class="kinetic-mark">✦</span>
+          <span>AINDA TEM MUITA COISA PRA CONSTRUIR</span><span class="kinetic-mark">✦</span>
+          <span>OBRIGADO</span><span class="kinetic-mark">✦</span>
+          <span>ANDRÉ LUÍS</span><span class="kinetic-mark">✦</span>
+          <span>CONTE TIJOLOS</span><span class="kinetic-mark">✦</span>
+          <span>AINDA TEM MUITA COISA PRA CONSTRUIR</span><span class="kinetic-mark">✦</span>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <span>22 de outubro de 2026</span>
+        <span>@designerandrecmg</span>
+      </div>
+
+      <div class="assinatura">
+        <img src="/assinatura.svg" alt="" draggable="false" />
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const clock = document.getElementById("live-clock");
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = now.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      });
+    };
+    tick();
+    setInterval(tick, 1000);
+
+    const block = (event) => event.preventDefault();
+    ["copy", "cut", "paste", "contextmenu", "selectstart", "dragstart"].forEach((name) => {
+      document.addEventListener(name, block, { capture: true });
+    });
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      if ((event.ctrlKey || event.metaKey) && ["c", "x", "a", "u", "s", "p"].includes(key)) {
+        event.preventDefault();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").classList.add("is-gone");
+      }, 1700);
+    });
+  </script>
+</body>
+</html>
